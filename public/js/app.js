@@ -5,7 +5,15 @@ var moment = moment();
 
 socket.on('connect', function () {
 	console.log('Connected to socket.io server')
+
+	socket.emit('joinRoom', {
+		name: name,
+		room: room
+	});
 });
+
+var $room = jQuery('.chat-room');
+$room.append(room);
 
 socket.on('message', function (message) {
 	var timestamp = moment.utc(message.timestamp);
